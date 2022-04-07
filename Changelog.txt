@@ -1,0 +1,13 @@
+Changelog
+
+1.6.0
+	Adoption by LGG
+	Updated for KSP 1.12.x
+	Removed DLLs
+	Added support for ClickThroughBlocker
+	Added support for ToolbarController
+	Added new dependencies:
+		ClickThroughBlocker
+		ToolbarController
+		SpaceTuxLibrary
+	Added automation files

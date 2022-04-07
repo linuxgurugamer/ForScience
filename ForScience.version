@@ -1,0 +1,25 @@
+{
+  "NAME": "ForScience",
+  "URL": "http://ksp.spacetux.net/avc/ForScience",
+  "DOWNLOAD": "https://github.com/linuxgurugamer/ForScience/releases",
+  "GITHUB": {
+    "USERNAME": "linuxgurugamer",
+    "REPOSITORY": "ForScience"
+  },
+  "VERSION": {
+    "MAJOR": 1,
+    "MINOR": 6,
+    "PATCH": 0,
+    "BUILD": 0
+  },
+  "KSP_VERSION": {
+    "MAJOR": 1,
+    "MINOR": 12,
+    "PATCH": 3
+  },
+  "KSP_VERSION_MIN": {
+    "MAJOR": 1,
+    "MINOR": 12,
+    "PATCH": 0
+  }
+}
