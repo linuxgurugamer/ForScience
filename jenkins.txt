@@ -31,7 +31,7 @@
 1:ForScience, ForScience.version
 
 # 2:PROJNAME, PROJFILE, VERSIONFILE, PLUGINSFOLDER
-2:ForScience,ForScience/ForScience.csproj,ForScience.version,GameData/ForScience/Plugins
+2:ForScience,Source/ForScience.csproj,ForScience.version,GameData/ForScience/Plugins
 
 # 3:SOURCEFILE, DESTDIR
 3:ForScience.version,GameData/ForScience
