@@ -1,4 +1,4 @@
-﻿using KSP.UI.Screens;
+using KSP.UI.Screens;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -166,10 +166,8 @@ namespace ForScience
                         Log.Info("Situationmask: " + currentExperiment.experiment.situationMask + ", BiomeMask: " +
                             currentExperiment.experiment.biomeMask);
                     }
-                    // TODO - Science Labs can use zero value science , so do not skip it if there is a lab on board
-                    // as a temporary workaround, if there is a scientist on board it will still gather the data.
-
-                    else if (CurrentScienceValue(currentExperiment) >= 0.1 || IsScientistOnBoard)
+                    // Science Labs can use zero value science, so do not skip it if there is a lab on board that can still process it
+                    else if (CurrentScienceValue(currentExperiment) >= 0.1 || CanBeProcessedByAnyLab(currentExperiment))
                     {
 
                         Log.Info("Running experiment: " + CurrentScienceSubject(currentExperiment.experiment).id);
@@ -326,6 +324,27 @@ namespace ForScience
         /// check if there is a scientist onboard so we can rerun things like goo or scijrs
         /// </summary>
         bool IsScientistOnBoard => CurrentVessel().GetVesselCrew().Any(k => k.trait == KerbalRoster.scientistTrait);
+
+        /// <summary>
+        /// Returns true if at least one lab on the current vessel can accept/process this experiment's data.
+        /// </summary>
+        bool CanBeProcessedByAnyLab(ModuleScienceExperiment experiment)
+        {
+            var data = NewScienceData(experiment); // creates ScienceData with subject id
+            var labs = CurrentVessel().FindPartModulesImplementing<ModuleScienceLab>();
+            foreach (var lab in labs)
+            {
+                // ensure lab can accept this kind of data
+                if (!lab.IsStorable(data))
+                    continue; // not a lab-processable experiment
+
+                // lab.ExperimentData is a list of processed subject ids; if it doesn't contain this id, it can be processed
+                if (lab.ExperimentData == null || !lab.ExperimentData.Contains(data.subjectID))
+                    return true;
+            }
+            return false;
+        }
+
 
         /// <summary>
         /// just returns the correct icon name for the given state
